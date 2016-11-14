@@ -39,6 +39,20 @@ Pokemon *make_pokemon(element e, std::string n) {
 
 }
 
+ostream &operator<<(ostream &outp, Pokemon &Poke)
+{
+	outp << "<name> " << Poke.name << " </name>" << endl;
+	outp << "<id> " << Poke.id << "</id>" << endl;
+	outp << "<defense> " << Poke.defense << " </defense>" << endl;
+	outp << "<attack> " << Poke.attack << " </attack>" << endl;
+	outp << "<entry>" << endl;
+	outp << "<number> " << a->PokeEntry.number<< " </number>" << endl;
+	outp << "<name> " << a->PokeEntry.name<< " </name>" << endl;
+	outp << "<entry>" << endl;
+
+	return outp;
+}
+
 void Pokemon::write()
 {
 	
