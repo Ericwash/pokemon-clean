@@ -20,6 +20,17 @@ protected:
 	int defense = 10;
 	int specialAttack = 10;
 	int specialDefense = 10;
+	
+struct PokeEntry { 
+	int number;
+	char name[20];
+	char type[20];
+	char description[100];
+	PokeEntry() {};
+	PokeEntry() {};
+	PokeEnty(int n) {};
+};
+
 
 public:
 	Pokemon(int i) {}
