@@ -1,4 +1,8 @@
 #include "pokemon.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
 
 Fire::Fire(int index) : Pokemon(index){
 	maxHP+=1; speed+=2;
