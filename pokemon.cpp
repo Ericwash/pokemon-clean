@@ -55,5 +55,10 @@ ostream &operator<<(ostream &outp, Pokemon &Poke)
 
 void Pokemon::write()
 {
-	
+	Pokemon pokeData;
+	ofstream newFile;
+	newFile.open
+	this->id (".dat");
+	newFile << pokeData;
+	newFile.close();
 }
