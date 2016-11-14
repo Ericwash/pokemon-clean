@@ -38,3 +38,8 @@ Pokemon *make_pokemon(element e, std::string n) {
 	return newPokemon;
 
 }
+
+void Pokemon::write()
+{
+	
+}
