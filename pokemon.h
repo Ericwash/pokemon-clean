@@ -27,7 +27,6 @@ struct PokeEntry {
 	char type[20];
 	char description[100];
 	PokeEntry() {};
-	PokeEntry() {};
 	PokeEnty(int n) {};
 };
 
