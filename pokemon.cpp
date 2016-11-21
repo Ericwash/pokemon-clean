@@ -1,136 +1,125 @@
-#ifndef POKEMON_H
-#define POKEMON_H
+#include "pokemon.h"
 
-#include <string>
-#include <cmath>
-#include <list>
+Fire::Fire(int index) : Pokemon(index){
+	maxHP+=1; speed+=2;
+	attack+=2; defense-=2;
+	specialAttack+=4; specialDefense+=1;
+	weaknesses.push_back(element::water);
+}
 
-enum class element {
-    fire = 0, water = 1, grass = 2, normal = 3, dragon = 4
-};
+Water::Water(int index) : Pokemon(index){
+	maxHP+=2; speed-=1;
+	attack-=2; defense+=2;
+	specialAttack-=4; specialDefense-=1;
+	weaknesses.push_back(element::grass);
+	virtual int attack1(Pokemon *pPointer){
 
-struct  PokeEntry { 
-	int number;
-	char name[20];
-	char type[20];
-	char description[100];
-	PokeEntry() {};
-	PokeEnty(int n) {};
-};
-
-
-
-class Pokemon {
-private:
-	std::string name;
-	int level = 1;
-	int id;
-	PokeEntry pEntry;	
-
-protected:
-	int maxHP = 20;
-	int currentHP = maxHP;
-	int speed = 10;
-	int attack = 10;
-	int defense = 10;
-	int specialAttack = 10;
-	int specialDefense = 10;
-	std::list<element> weaknesses;
-
-public:
-	Pokemon(int i) {}
-	~Pokemon() {}
-	std::string get_name() {
-		return name;
-	}
-	int get_level() {
-		return level;
-	}
-	int get_maxHP() {
-		return maxHP;
-	}
-	int get_currentHP() {
-		return currentHP;
-	}
-
-        string get_species() {
-		return this -> pEntry.name;
-	}
-
-	int take_damage(int damageAmount, std::list<element> damageTypes);
-
-	friend Pokemon* make_pokemon(element type, std::string name);
-
-};
-
-class Fire: public Pokemon {
-public:
-	Fire(int index);
-};
-
-class Water: public Pokemon {
-public:
-	Water(int index);
-};
-
-class Grass: public Pokemon {
-public:
-	Grass(int index);
-};
-
-class Squirtle: public Water {
-
-    public:
-        Squirtle(sting nickname = "Squirtle"){
-                  pokemon.name = nickname
-	};
-
-	virtual int attack2(Pokemon *pPointer){
-	cout << &name << " Tackle " << pPointer &pEntry.name << " took " << pPointer &take_damage(2,list<element> (water)) << " damage!" <<endl;
-
-	};
-
-    protected:
-
-    private:
-};
-
-class Wartortle: public Water {
-
-    public:
-        Wartortle(sting nickname = "Wartortle"){
-                  pokemon.name = nickname
 	};
 	
-	virtual int attack2(Pokemon *pPointer){
-	cout << &name << " Surf " << pPointer &pEntry.name << " took " << pPointer &take_damage(4,list<element> (water)) << " damage!" <<endl;
+}
 
-	};
+Grass::Grass(int index) : Pokemon(index){
+	maxHP-=3; speed-=2;
+	attack-=2; defense+=0;
+	specialAttack-=3; specialDefense+=0;
+	weaknesses.push_back(element::fire);
+}
 
+Squirtle::Squartle() : Water(7){
+	public:
+	int attack1(Pokemon *pPointer){
+	cout << &name << " used bubble " << pPointer &pEntry.name << " took " << pPointer &take_damage(2,list<element> (water)) << " damage!" <<endl;
 
-    protected:
+	}
 
-    private:
+}
+
+Wartorle::Wortortle() : Water(8){
+	public:
+	int attack1(Pokemon *pPointer){
+	cout << &name << " used bubble " << pPointer &pEntry.name << " took " << pPointer &take_damage(2,list<element> (water)) << " damage!" <<endl;
+
+	}
+}
+
+Blastoise::Blastoise() : Water(9)
+{
+	public:
+	int attack1(Pokemon *pPointer){
+	cout << &name << " used water pledge " << pPointer &pEntry.name << " took " << pPointer &take_damage(8,list<element> (water)) << " damage!" <<endl;
+
+	}
+}
+
+int Pokemon::take_damage(int damageAmount, std::list<element> damageTypes) {
+	int weaknessCount = 0;
+	for(auto wIt = weaknesses.begin(); wIt != weaknesses.end(); wIt++)
+		for(auto dIt = damageTypes.begin(); dIt != damageTypes.end(); dIt++)
+			if(*dIt == *wIt) weaknessCount++;
+
+	damageAmount = damageAmount * (log(5 * weaknessCount + 5) / log(5));
+	currentHP -= damageAmount;
+	return damageAmount;
 };
 
-class Blastoise: public Water {
+/*Pokemon *make_pokemon(element e, std::string n) {
 
-    public:
-        Blastoise(sting nickname = "Blastoise"){
-                  pokemon.name = nickname
-	};
+	Pokemon *newPokemon;
+	if(e == element::fire) {
+		newPokemon = new Fire(1);
+		newPokemon->name = n;
+	} else if(e == element::grass) {
+		newPokemon = new Grass(1);
+		newPokemon->name = n;
+	} else if(e == element::water) {
+		newPokemon = new Water(1);
+		newPokemon->name = n;
+	}
+	return newPokemon;
 
-	virtual int attack2(Pokemon *pPointer){
-	cout << &name << " Hydro Cannon " << pPointer &pEntry.name << " took " << pPointer &take_damage(6,list<element> (water)) << " damage!" <<endl;
+}*/
+
+Pokemon *make_pokemon(int index) {
+	Pokemon *newPokemon:
+	switch (index){
+		case 7: newPokemon = newSqurtle;
+		break;
+ 
+		case 8: newPokemon = newWartortle;
+		break;
+
+		case 9: newPokemon = Blastoise;
+		break;
+		}
+	return newPokemon;
+}
 
 
-	};
 
-    protected:
-
-    private:
-};
+std::ostream &operator << (std::ostream &output, Pokemon &poke){
 
 
+	output << "<pokemon>\n";
+	output << "  <id> " << poke.id << " </id>\n";
+	output << "  <name> " << poke.name << " </id>\n";
+	output << "  <attack> " << poke.attack << " </attack>\n";
+	output << "  <defense> " << poke.defense << " </defense>\n";
+	output << "  <entry>\n";
+	output << "    <number> " << poke.pEntry.number << " </number>\n";
+	output << "    <name> " << poke.pEntry.name << " </name>\n";
+	output << "  </entry>\n";
+	output << "</pokemon>";
 
-#endif // POKEMON_H
+	return output;
+}
+
+void Pokemon::write(){
+
+	std::ofstream saveFile;
+	saveFile.open(this->id + ".dat");
+
+	saveFile << this;
+
+	saveFile.close();
+
+}
